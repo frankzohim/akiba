@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Http;
-
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Customer;
+use App\Http\Middleware\Vendor;
+use App\Http\Middleware\Shipper;
+use App\Http\Middleware\User;
+use App\Http\Middleware\PreventBackHistory;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -19,6 +24,7 @@ class Kernel extends HttpKernel
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+         \App\Http\Middleware\Localization::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
@@ -34,6 +40,7 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+             \App\Http\Middleware\Localization::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
@@ -64,5 +71,11 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'preventBack'=>PreventBackHistory::class,
+        'admin'=>Admin::class,
+        'vendor'=>Vendor::class,
+        'customer'=>Customer::class,
+        'shipper'=>Shipper::class,
+        'user'=>User::class,
     ];
 }
