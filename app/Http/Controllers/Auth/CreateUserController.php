@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Services\Api\UrlApiService;
-use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
 class CreateUserController extends Controller
@@ -14,9 +13,7 @@ class CreateUserController extends Controller
         return view('auth.register');
     }
 
-    public function store(UserRequest $request){
-
-        $validatedData=$request->validated();
+    public function store(Request $request){
 
         $url=(new UrlApiService())->getUrl();
         $u=$url."/api/user";
@@ -24,6 +21,9 @@ class CreateUserController extends Controller
         try{
 
             $response = Http::asForm()->post($u, [
+                'username' => $request->username,
+                'role_id' => $request->role_id,
+                'email' => $request->email,
                 'phone_number' => $request->phone_number,
                 'password' => $request->password,
             ]);
