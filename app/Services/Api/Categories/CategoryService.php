@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Services\Api\Brands;
+namespace App\Services\Api\Categories;
 
 use Exception;
 use App\Services\Api\UrlApiService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
-class BrandService{
+class CategoryService{
 
-     public function brands(){
+     public function categories(){
         
         
         $url=(new UrlApiService())->getUrl();
             
             try{
                 $token=Session::get('tokenUser');
-                $response = Http::asForm()->withToken($token)->get($url."/api/v1/brands");
+                $response = Http::asForm()->withToken($token)->get($url."/api/v1/categories");
                
-                $brands = json_decode((string) $response->getBody(), true);
+                $Categories = json_decode((string) $response->getBody(), true);
                 
-                if($brands['data'] === null){
+                if($Categories['data'] === null){
                     return [];
                 }
                 else{
-                    return $brands['data'];
+                    return $Categories['data'];
                 }
 
             }catch(\Exception $e){
@@ -34,20 +34,21 @@ class BrandService{
 
     }
 
-    public function getbrand($id){
+    public function getCategory($id){
         
         $url=(new UrlApiService())->getUrl();
             
             try{
                 $token=Session::get('tokenUser');
-                $response = Http::asForm()->withToken($token)->get($url."/api/brands/".$id);
-                $brand = json_decode((string) $response->getBody(), true);
+                $response = Http::asForm()->withToken($token)->get($url."/api/v1/categories/".$id);
+                //dd($response->body());
+                $category = json_decode((string) $response->getBody(), true);
 
-                if($brand['data'] === null){
+                if($category['data'] === null){
                     return null;
                 }
                 else{
-                    return $brand['data'];
+                    return $category['data'];
                 }
 
             }catch(\Exception $e){
@@ -57,15 +58,16 @@ class BrandService{
 
     }
 
-   public function create($brand){
+   public function create($Category){
 
         $url=(new UrlApiService())->getUrl();
 
         try{
             $token=Session::get('tokenUser');
-            $response = Http::asForm()->withToken($token)->post($url."/api/v1/brands", [
-                'name' => $brand['name'],
-                'state' => $brand['state'],
+            $response = Http::asForm()->withToken($token)->post($url."/api/v1/categories", [
+                'name' => $Category['name'],
+                'state' => $Category['state'],
+                'parent' => $Category['parent'],
             ]);
 
             return $response;
@@ -77,13 +79,13 @@ class BrandService{
         
     }
 
-    public function delete($brand){
+    public function delete($category){
 
         $url=(new UrlApiService())->getUrl();
 
         try{
             $token=Session::get('tokenUser');
-            $response = Http::asForm()->withToken($token)->delete($url."/api/v1/brands/".$brand, [
+            $response = Http::asForm()->withToken($token)->delete($url."/api/v1/categories/".$category, [
             ]);
 
             return $response;

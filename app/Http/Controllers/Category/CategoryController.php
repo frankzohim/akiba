@@ -1,29 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Brand;
+namespace App\Http\Controllers\Category;
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
-use App\Services\Api\Brands\BrandService;
+use App\Services\Api\Categories\CategoryService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Services\Api\UrlApiService;
 use Illuminate\Support\Facades\Session;
-use Image;
 use Redirect;
-class BrandController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $brands = (new BrandService())->brands();
+        $categories = (new CategoryService())->categories();
          //Delete directory on page refresh
-        \Illuminate\Support\Facades\Storage::deleteDirectory('brands');
-        //dd($brands );
-        if($brands || $brands==[]){
-            return view('dashboard.admin.brand.index', compact('brands'));
+        \Illuminate\Support\Facades\Storage::deleteDirectory('categories');
+        //dd($categories );
+      
+        if($categories || $categories==[]){
+            return view('dashboard.admin.category.index', compact('categories'));
         }
 
         else
@@ -43,6 +42,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        
          //Retrieve URL API
         $url=(new UrlApiService())->getUrl();
         //Validate data
@@ -59,39 +59,40 @@ class BrandController extends Controller
         }
 
         //Validation passed, processing with API storage
+       
+         $category['name'] = $request->name;
+         $category['state'] = $request->state;
+         $category['parent'] = $request->parent;
 
-         $brand['name'] = $request->name;
-         $brand['state'] = $request->state;
+         $category = (new CategoryService)->create($category);
+        //dd($category->body());
+         if($category){
 
-         $brand = (new BrandService)->create($brand);
-        
-         if($brand){
+            if($category->status() == 201){
 
-            if($brand->status() == 201){
-
-                //Now uploading brand's logo
-                $id = json_decode((string) $brand->getBody(), true)['data']['id'];
+                //Now uploading Category's logo
+                $id = json_decode((string) $category->getBody(), true)['data']['id'];
                 $token=Session::get('tokenUser');
-                foreach (\Illuminate\Support\Facades\Storage::files('brands') as $filename) {
+                foreach (\Illuminate\Support\Facades\Storage::files('categories') as $filename) {
                     $logo = \Illuminate\Support\Facades\Storage::get($filename);
                     //dd($logo);
                     $responseImage = Http::attach(
                         'file', $logo, $filename
-                    )->withToken($token)->post($url."/api/v1/brand/image", [
-                            'brand_id' => $id,
+                    )->withToken($token)->post($url."/api/v1/category/image", [
+                            'category_id' => $id,
                     ]);
 
                     //dd($responseImage->getBody());
 
                 }
-                $brand =  (json_decode((string) $brand->getBody(), true))['data'];
+                $category =  (json_decode((string) $category->getBody(), true))['data'];
               
-                return Redirect::back()->with('success',"Brand has been successfully added");
+                return Redirect::back()->with('success',"Category has been successfully added");
 
 
             }
-            elseif($brand->status() == 400){
-                return Redirect::back()->withInput()->withErrors(['msg' => json_decode((string) $brand->getBody(), true)]);
+            elseif($category->status() == 400){
+                return Redirect::back()->withInput()->withErrors(['msg' => json_decode((string) $category->getBody(), true)]);
             }
          }
          else{
@@ -103,7 +104,7 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Brand $brand)
+    public function show(Category $category)
     {
         
     }
@@ -111,15 +112,26 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Brand $brand)
+    public function edit($id)
     {
-        //
+
+        $category = (new CategoryService())->getCategory($id);
+         //Delete directory on page refresh
+        \Illuminate\Support\Facades\Storage::deleteDirectory('categories');
+        //dd($category);
+        $categories = (new CategoryService())->categories();
+        if($category){
+            return view('dashboard.admin.category.edit', compact('category', 'categories'));
+        }
+
+        else
+            dd('error');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         
 
@@ -128,14 +140,16 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function delete($brand)
-    {
-       $response = (new BrandService)->delete($brand);
+    public function delete($category)
+    { 
+       //dd($category);
+       $response = (new CategoryService)->delete($category);
 
        if($response->status() == 204){
-        return Redirect::back()->with('success',"Brand has been successfully deleted");
+        return Redirect::back()->with('success',"Category has been successfully deleted");
        }
        else{
+       
             return Redirect::back()->withInput()->withErrors(['msg' => "An error occured why deleting"]);
        }
     }
@@ -163,13 +177,13 @@ class BrandController extends Controller
         $imageName = $request->file_id . '_'.$request->file('file')->getClientOriginalName();
               
         //Make directory on page refresh
-        \Illuminate\Support\Facades\Storage::makeDirectory('brands');
+        \Illuminate\Support\Facades\Storage::makeDirectory('categories');
         //$request->file->move(public_path('images'), $imageName);
-        $request->file->storeAs('brands', $imageName);
+        $request->file->storeAs('categories', $imageName);
         // if($extension === 'jpg')
-        //     $request->file->move(storage_path('app\brands',$imageName));
+        //     $request->file->move(storage_path('app\Categories',$imageName));
         // else
-        //     $request->file->move(storage_path('app\brands',$imageName));
+        //     $request->file->move(storage_path('app\Categories',$imageName));
 
                 
                 return response('Logo addedd successfuly', 200);
@@ -177,9 +191,18 @@ class BrandController extends Controller
 
     }
 
+    public function categoryImage($id, $path)
+    {
+     
+        $url=(new UrlApiService())->getUrl();
+        $response = Http::asForm()->get($url.'/api/categoryImage/'.$id.'/'.$path);
+        return $response;
+
+    }
+
     public function deleteImage(Request $request){
 
-         \Illuminate\Support\Facades\Storage::deleteDirectory('brands');
+         \Illuminate\Support\Facades\Storage::deleteDirectory('categories');
        
           return response("deleted successfully", 200)
                   ->header('Content-Type', 'application/json');

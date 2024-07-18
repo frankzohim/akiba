@@ -23,7 +23,7 @@
                     <div class="ps-sidebar__center">
                         <ul class="menu">
                             <li><a class="active" href="{{ route('admin.dashboard')}}"><i class="icon-home"></i>Dashboard</a></li>
-                            <li><a href="Categories.html"><i class="icon-papers"></i>Categories</a></li>
+                            <li><a href="{{route('category')}}"><i class="icon-papers"></i>Categories</a></li>
                             <li><a href="{{route('brand')}}"><i class="icon-shield-check"></i>Brands</a></li>
                             <li><a href="Categories.html"><i class="icon-server"></i>Stores</a></li>
                             <li><a href="products.html"><i class="icon-database"></i>Products</a></li>

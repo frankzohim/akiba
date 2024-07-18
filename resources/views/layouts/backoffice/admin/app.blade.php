@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('backoffice/admin/plugins/summernote/summernote-bs4.min.css')}}">
     <link rel="stylesheet" href="{{ asset('backoffice/admin/plugins/apexcharts-bundle/dist/apexcharts.css')}}">
     <link rel="stylesheet" href="{{ asset('backoffice/admin/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('backoffice/admin/css/thumbnail.css')}}">
 </head>
 
 <body>
