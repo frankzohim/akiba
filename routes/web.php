@@ -54,6 +54,7 @@ Route::get('/login',[LoginViewController::class,'getViewLogin'])->middleware('pr
 
 //Image display route
 Route::get('categoryImage/{id}/{path}',[CategoryController::class, 'categoryImage'])->name('display.category.image');
+Route::get('productImage/{id}/{path}',[ProductController::class, 'productImage'])->name('display.product.image');
 
 
 //middleware admin

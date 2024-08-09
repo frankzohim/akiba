@@ -1,5 +1,5 @@
 @extends('layouts.frontoffice.master')
-@section('title', 'Add Product')
+@section('title', 'Edit Product')
 @section('content')
 
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
@@ -14,7 +14,7 @@
                 </div>
                  <div id="ppt-invalid-fields" style="display:none;" >
                     <div class="alert alert-danger p-3  alert-dismissible fade show" role="alert">
-                                <strong><i class="fa fa-exclamation-triangle mr-2"></i>  {{ __("Adding Product")}}  : </strong> <span id="ppt-invalid-fields-text"></span>
+                                <strong><i class="fa fa-exclamation-triangle mr-2"></i>  {{ __("Editing Product")}}  : </strong> <span id="ppt-invalid-fields-text"></span>
                     </div>
                 </div>
                  @if($errors->any())
@@ -49,33 +49,33 @@
                                         <div class="form-group">
                                             <label>Product Name<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter product name..." />
+                                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter product name..." value="{{ $product['name']}}"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Reference<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" id="reference" name="reference" placeholder="Enter product Reference..." />
+                                            <input class="form-control" type="text" id="reference" name="reference" placeholder="Enter product Reference..." value="{{ $product['reference']}}" />
                                         </div>
                                         <div class="form-group">
                                             <label>Product Summary<sup>*</sup>
                                             </label>
-                                            <textarea class="form-control" id="summary" name="summary" rows="6" placeholder="Enter product description..."></textarea>
+                                            <textarea class="form-control" id="summary" name="summary" rows="6" placeholder="Enter product description...">{{ $product['summary']}}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label>Product Description<sup>*</sup>
                                             </label>
-                                            <textarea class="form-control" id="description" name="description" rows="7.5" placeholder="Enter product description..."></textarea>
+                                            <textarea class="form-control" id="description" name="description" rows="7.5" placeholder="Enter product description...">{{ $product['description']}}</textarea>
                                         </div>
                                     
                                         <div class="form-group">
                                             <label>Sale Price<sup>*</sup>
                                             </label>
-                                            <input class="form-control" id="price" name="price" type="number" min=0 placeholder="" />
+                                            <input class="form-control" id="price" name="price" type="number" min=0 placeholder="" value="{{ $product['price']}}"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Sale Quantity<sup>*</sup>
                                             </label>
-                                            <input class="form-control" id="sale_quantity" name="sale_quantity" type="number" value=1 min=0 placeholder="" />
+                                            <input class="form-control" id="sale_quantity" name="sale_quantity" type="number" value=1 min=0 placeholder="" value="{{ $product['sale_quantity']}}" />
                                         </div>
                                        
                                      
@@ -91,13 +91,13 @@
                                         <div class="form-group">
                                             <label>SKU<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" id="sku" name="sku" placeholder="" />
+                                            <input class="form-control" type="text" id="sku" name="sku" placeholder="" value="{{ $product['sku']}}" />
                                         </div>
                                         <div class="form-group">
                                             <label>Stock Quantity<sup>*</sup>
                                             </label>
                                             <input class="form-control" type="number" min=0  
-                                            id="stock" name="stock" placeholder="" />
+                                            id="stock" name="stock" placeholder="" value="{{ $product['stock_quantity']}}"/>
                                         </div>
                                         <div class="form-group form-group--select">
                                             <label>Category
@@ -106,7 +106,10 @@
                                                 <select class="ps-select" id="category" name="category" title="category" style="width: 100%">
                                                     <option>Select category</option>
                                                     @forelse ($categories as $category)
-                                                        <option value="{{ $category['id'] }}">{{ $category['name']}}</option>
+                                                        <option value="{{ $category['id'] }}" 
+                                                        @if($category['id'] == $product['category']['id']) selected @endif>
+                                                            {{ $category['name']}}
+                                                        </option>
                                                     @empty
                                                         
                                                     @endforelse
@@ -123,7 +126,10 @@
                                                  
                                                    <option>Select brand</option>
                                                     @forelse ($brands as $brand)
-                                                        <option value="{{ $brand['id'] }}">{{ $brand['name']}}</option>
+                                                        <option value="{{ $brand['id'] }}"
+                                                         @if($brand['id'] == $product['brand']['id']) selected @endif>
+                                                         {{ $brand['name']}}
+                                                        </option>
                                                     @empty
                                                         
                                                     @endforelse

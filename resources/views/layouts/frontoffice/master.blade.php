@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+     <script src="{{ asset('assets/js/app.js')}}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/market-place-3.css')}}">
 </head>
 
@@ -111,6 +112,7 @@
     <script src="{{ asset('assets/plugins/gmap3.min.js')}}"></script>
     <!-- custom scripts-->
     <script src="{{ asset('assets/js/main.js')}}"></script>
+   
 </body>
 
 </html>

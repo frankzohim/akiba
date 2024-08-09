@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
+use App\Services\Api\Products\ProductService;
+use App\Services\Api\Categories\CategoryService;
+use App\Services\Api\Brands\BrandService;
 use App\Services\Api\Stores\StoreService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -20,10 +23,13 @@ class ProductController extends Controller
         $store = (new StoreService())->getVendorStore();
         if($store != null){
             $store = $store[0];
-            //dd($Product);
+            $products = $store['products'];
+            $products = (new ProductService())->getProductStore($store['id']);
+            //dd($products);
             //Delete directory on page refresh
             \Illuminate\Support\Facades\Storage::deleteDirectory('products');
-            return view('dashboard.vendor.product.index', compact('store'));
+            //dd($products);
+            return view('dashboard.vendor.product.index', compact('store', 'products'));
         }
         else
          return redirect()->route('db.vendor.index');
@@ -36,72 +42,74 @@ class ProductController extends Controller
     public function create()
     {
 
-         //Delete directory on page refresh
-         $user = Session::get('currentUser');
+        //Delete directory on page refresh
+        $user = Session::get('currentUser');
+
+        //Loading products categories
+        $categories = (new CategoryService())->categories();
+        //Loading brand
+        $brands = (new BrandService())->brands();
+
+        //dd($categories);
         \Illuminate\Support\Facades\Storage::deleteDirectory('products./'.$user->id);
-        return view('dashboard.vendor.product.create');
+        return view('dashboard.vendor.product.create', compact('categories', 'brands'));
     }
 
     /**
-     * Product a newly created resource in storage.
+     * Store a newly created resource in storage.
      */
-    public function Product(Request $request)
+    public function store(Request $request)
     {
         
-         //Retrieve URL API
+        //Retrieve URL API
         $url=(new UrlApiService())->getUrl();
-        //Validate data
 
-        //  $validator = Validator::make($request->all(), [
-        //     'name' => ['required', 'string','max:50'],
-        //     'email' => ['required', 'email','max:50'],
-        //     'phone' => ['required', 'integer','max:50'],
-        //     'description' => ['required', 'string','max:2000']
-        // ]);
- 
-     
-        // if($validator->fails()) {
-        //     return Redirect::back()->withErrors($validator)
-        //                             ->withInput();
-        // }
-
-        //Validation passed, processing with API storage
+        //Processing with API storage
        
-        //dd($request->phone);
-         $Product['name'] = $request->name;
-         $Product['email'] = $request->email;
-         $Product['phone'] = $request->phone;
-         $Product['description'] = $request->description;
+        //dd($request->reference);
+        $product['name'] = $request->name;
+        $product['reference'] = $request->reference;
+        $product['summary'] = $request->summary;
+        $product['description'] = $request->description;
+        $product['price'] = $request->price;
+        $product['sale_quantity'] = $request->sale_quantity;
+        $product['sku'] = $request->sku;
+        $product['stock'] = $request->stock;
+        $product['category'] = $request->category;
+        $product['brand'] = $request->brand;
+        $product['state'] = $request->state;
+        $product['video'] = $request->video;
 
-         $Product = (new ProductService)->create($Product);
-        //dd($Product->body());
-         if($Product){
+        $product = (new ProductService)->create($product);
+        //dd($product->body());
+         if($product){
 
-            if($Product->status() == 201){
+            if($product->status() == 201){
 
                 //Now uploading Product's logo
-                $id = json_decode((string) $Product->getBody(), true)['data']['id'];
+                $id = json_decode((string) $product->getBody(), true)['data']['id'];
                 $token=Session::get('tokenUser');
-                foreach (\Illuminate\Support\Facades\Storage::files('Products') as $filename) {
+                $user = Session::get('currentUser');
+                foreach (\Illuminate\Support\Facades\Storage::files('products/'.$user->id) as $filename) {
                     $logo = \Illuminate\Support\Facades\Storage::get($filename);
                     //dd($logo);
                     $responseImage = Http::attach(
                         'file', $logo, $filename
-                    )->withToken($token)->post($url."/api/v1/Product/image", [
-                            'Product_id' => $id,
+                    )->withToken($token)->post($url."/api/v1/product/image", [
+                            'product_id' => $id,
                     ]);
 
                     //dd($responseImage->getBody());
 
                 }
-                $Product =  (json_decode((string) $Product->getBody(), true))['data'];
+                $product =  (json_decode((string) $product->getBody(), true))['data'];
               
-                return redirect()->route('Product')->with('success',"Product has been successfully added");
+                return redirect()->route('product')->with('success',"Product has been successfully added");
 
 
             }
-            elseif($Product->status() == 400){
-                return Redirect::back()->withInput()->withErrors(['msg' => json_decode((string) $Product->getBody(), true)]);
+            elseif($product->status() == 400){
+                return Redirect::back()->withInput()->withErrors(['msg' => json_decode((string) $product->getBody(), true)]);
             }
          }
          else{
@@ -124,13 +132,17 @@ class ProductController extends Controller
     public function edit($id)
     {
 
-        $Product = (new ProductService())->getProduct($id);
+        $product = (new ProductService())->getProduct($id);
+        //dd($product);
          //Delete directory on page refresh
-        \Illuminate\Support\Facades\Storage::deleteDirectory('Products');
-        //dd($Product);
-        $Products = (new ProductService())->Products();
-        if($Product){
-            return view('dashboard.admin.Product.edit', compact('Product', 'Products'));
+        \Illuminate\Support\Facades\Storage::deleteDirectory('products');
+
+        //Loading products categories
+        $categories = (new CategoryService())->categories();
+        //Loading brand
+        $brands = (new BrandService())->brands();
+        if($product){
+            return view('dashboard.vendor.product.edit', compact('product', 'categories','brands'));
         }
 
         else
@@ -149,10 +161,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function delete($Product)
+    public function delete($product)
     { 
-       //dd($Product);
-       $response = (new ProductService)->delete($Product);
+       
+       $response = (new ProductService)->delete($product);
 
        if($response->status() == 204){
         return Redirect::back()->with('success',"Product has been successfully deleted");
@@ -168,7 +180,7 @@ class ProductController extends Controller
         $image = $request->file('file');
         $extension = $image->getClientOriginalExtension();
 
-        $allowedfileExtension=['jpg','png','jpeg'];
+        $allowedfileExtension=['jpg','png','jpeg','JPG','PNG','JPEG'];
 
         $check = in_array($extension,$allowedfileExtension);
 
@@ -186,9 +198,10 @@ class ProductController extends Controller
         $imageName = $request->file_id . '_'.$request->file('file')->getClientOriginalName();
               
         //Make directory on page refresh
-        \Illuminate\Support\Facades\Storage::makeDirectory('Products');
+        $user = Session::get('currentUser');
+        \Illuminate\Support\Facades\Storage::makeDirectory('products/'.$user->id);
         //$request->file->move(public_path('images'), $imageName);
-        $request->file->ProductAs('Products', $imageName);
+        $request->file->storeAs('products/'.$user->id, $imageName);
         // if($extension === 'jpg')
         //     $request->file->move(storage_path('app\Products',$imageName));
         // else
@@ -200,11 +213,11 @@ class ProductController extends Controller
 
     }
 
-    public function ProductImage($id, $path)
+    public function productImage($id, $path)
     {
      
         $url=(new UrlApiService())->getUrl();
-        $response = Http::asForm()->get($url.'/api/ProductImage/'.$id.'/'.$path);
+        $response = Http::asForm()->get($url.'/api/productImage/'.$id.'/'.$path);
         return $response;
 
     }

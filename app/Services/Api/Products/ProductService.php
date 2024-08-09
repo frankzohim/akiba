@@ -4,6 +4,7 @@ namespace App\Services\Api\Products;
 
 use Exception;
 use App\Services\Api\UrlApiService;
+use App\Services\Api\Stores\StoreService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
@@ -60,21 +61,47 @@ class ProductService{
 
     }
 
-    public function getProduct($id){
+    public function getProductStore($storeId){
+        
         
         $url=(new UrlApiService())->getUrl();
             
             try{
                 $token=Session::get('tokenUser');
-                $response = Http::asForm()->withToken($token)->get($url."/api/v1/Products/".$id);
+                $user = Session::get('currentUser');
+                $response = Http::asForm()->withToken($token)->get($url."/api/v1/products/store/".$storeId);
                 //dd($response->body());
-                $Product = json_decode((string) $response->getBody(), true);
+                $products = json_decode((string) $response->getBody(), true);
+                //dd($products);
+                if($products['data'] === null){
+                    return [];
+                }
+                else{
+                    return $products['data'];
+                }
 
-                if($Product['data'] === null){
+            }catch(\Exception $e){
+
+                return [];
+            }
+
+    }
+
+    public function getProduct($id){
+       
+        $url=(new UrlApiService())->getUrl();
+            
+            try{
+                $token=Session::get('tokenUser');
+                $response = Http::asForm()->withToken($token)->get($url."/api/v1/products/".$id);
+                //dd($response->body());
+                $product = json_decode((string) $response->getBody(), true);
+
+                if($product['data'] === null){
                     return null;
                 }
                 else{
-                    return $Product['data'];
+                    return $product['data'];
                 }
 
             }catch(\Exception $e){
@@ -84,20 +111,28 @@ class ProductService{
 
     }
 
-   public function create($Product){
+   public function create($product){
 
         $url=(new UrlApiService())->getUrl();
-
+        $store = (new StoreService())->getVendorStore();
         try{
             $token=Session::get('tokenUser');
             $user = Session::get('currentUser');
-            $response = Http::asForm()->withToken($token)->post($url."/api/v1/Products", [
-                'name' => $Product['name'],
-                'email' => $Product['email'],
-                'phone_number' => $Product['phone'],
-                'description' => $Product['description'],
-                'state' => 0,
-                'user_id' => $user->id
+            //dd($token);
+            $response = Http::asForm()->withToken($token)->post($url."/api/v1/products", [
+                'name' => $product['name'],
+                'reference' => $product['reference'],
+                'summary' => $product['summary'],
+                'description' => $product['description'],
+                'price' => $product['price'],
+                'sale_quantity' => $product['sale_quantity'],
+                'sku' => $product['sku'],
+                'stock' =>  $product['stock'],
+                'category' => $product['category'],
+                'brand' => $product['brand'],
+                'state' => $product['state'] ,
+                'video' => $product['video'],
+                'store' => $store[0]['id']
             ]);
 
             return $response;
@@ -109,14 +144,17 @@ class ProductService{
         
     }
 
-    public function delete($Product){
+    public function delete($product){
 
+        
         $url=(new UrlApiService())->getUrl();
 
         try{
             $token=Session::get('tokenUser');
-            $response = Http::asForm()->withToken($token)->delete($url."/api/v1/Products/".$Product, [
+            $response = Http::asForm()->withToken($token)->delete($url."/api/v1/products/".$product, [
             ]);
+
+            //dd($response->body());
 
             return $response;
 

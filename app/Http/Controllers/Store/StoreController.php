@@ -167,7 +167,7 @@ class StoreController extends Controller
         $image = $request->file('file');
         $extension = $image->getClientOriginalExtension();
 
-        $allowedfileExtension=['jpg','png','jpeg'];
+        $allowedfileExtension=['jpg','png','jpeg', 'JPG','PNG','JPEG'];
 
         $check = in_array($extension,$allowedfileExtension);
 
