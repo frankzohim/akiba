@@ -16,13 +16,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = (new CategoryService())->categories();
-         //Delete directory on page refresh
-        \Illuminate\Support\Facades\Storage::deleteDirectory('categories');
-        //dd($categories );
+        $categoriesAdmin = (new CategoryService())->categories();
+
+        //dd($categoriesAdmin);
       
-        if($categories || $categories==[]){
-            return view('dashboard.admin.category.index', compact('categories'));
+        if($categoriesAdmin || $categoriesAdmin==[]){
+            return view('dashboard.admin.category.index', compact('categoriesAdmin'));
         }
 
         else
@@ -69,24 +68,8 @@ class CategoryController extends Controller
          if($category){
 
             if($category->status() == 201){
-
-                //Now uploading Category's logo
-                $id = json_decode((string) $category->getBody(), true)['data']['id'];
-                $token=Session::get('tokenUser');
-                foreach (\Illuminate\Support\Facades\Storage::files('categories') as $filename) {
-                    $logo = \Illuminate\Support\Facades\Storage::get($filename);
-                    //dd($logo);
-                    $responseImage = Http::attach(
-                        'file', $logo, $filename
-                    )->withToken($token)->post($url."/api/v1/category/image", [
-                            'category_id' => $id,
-                    ]);
-
-                    //dd($responseImage->getBody());
-
-                }
+               
                 $category =  (json_decode((string) $category->getBody(), true))['data'];
-              
                 return Redirect::back()->with('success',"Category has been successfully added");
 
 

@@ -6,6 +6,7 @@ use App\Http\Middleware\Customer;
 use App\Http\Middleware\Vendor;
 use App\Http\Middleware\Shipper;
 use App\Http\Middleware\User;
+use App\Http\Middleware\SharedViewDataMiddleware;
 use App\Http\Middleware\PreventBackHistory;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -77,5 +78,6 @@ class Kernel extends HttpKernel
         'customer'=>Customer::class,
         'shipper'=>Shipper::class,
         'user'=>User::class,
+        'sharedView'=>SharedViewDataMiddleware::class,
     ];
 }

@@ -25,9 +25,10 @@
 const formatPrice = function(ids){
  console.log(ids);
  ids.forEach(element => {
+   
     document.querySelector(`#product-price-${element}`).textContent = new Intl.NumberFormat('en-US', options).format(Number(document.querySelector(`#product-price-${element}`).textContent));
 
     //  document.querySelector(`#product-date-${element}`).textContent = new Intl.NumberFormat('en-US', options).format(Number(document.querySelector(`#product-price-${element}`).textContent));
-    console.log(new Date(document.querySelector(`#product-date-${element}`).textContent));
+    //console.log(new Date(document.querySelector(`#product-date-${element}`).textContent));
  });
 }

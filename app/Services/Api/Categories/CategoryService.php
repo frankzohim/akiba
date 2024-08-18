@@ -34,6 +34,30 @@ class CategoryService{
 
     }
 
+     public function getCategories(){
+        
+        
+        $url=(new UrlApiService())->getUrl();
+            
+            try{
+                $response = Http::get($url."/api/categoriesList");
+                //dd($response->body());
+                $Categories = json_decode((string) $response->getBody(), true);
+                //dd($Categories);
+                if($Categories['data'] === null){
+                    return [];
+                }
+                else{
+                    return $Categories['data'];
+                }
+
+            }catch(\Exception $e){
+
+                return [];
+            }
+
+    }
+
     public function getCategory($id){
         
         $url=(new UrlApiService())->getUrl();

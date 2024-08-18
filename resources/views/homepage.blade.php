@@ -346,115 +346,23 @@
             </ul>
         </div>
     </div>
-    <div id="homepage-5">
-        <div class="ps-home-banner">
-            <div class="container">
+    <div id="homepage-1">
+        <div class="ps-home-banner ps-home-banner--1">
+            <div class="ps-container">
                 <div class="ps-section__left">
-                    <ul class="menu--dropdown">
-                        <li><a href="#"><i class="icon-star"></i> Hot Promotions</a>
-                        </li>
-                        <li class="menu-item-has-children has-mega-menu"><a href="#"><i class="icon-laundry"></i> Consumer Electronic</a>
-                            <div class="mega-menu">
-                                <div class="mega-menu__column">
-                                    <h4>Electronic<span class="sub-toggle"></span></h4>
-                                    <ul class="mega-menu__list">
-                                        <li><a href="#">Home Audio &amp; Theathers</a>
-                                        </li>
-                                        <li><a href="#">TV &amp; Videos</a>
-                                        </li>
-                                        <li><a href="#">Camera, Photos &amp; Videos</a>
-                                        </li>
-                                        <li><a href="#">Cellphones &amp; Accessories</a>
-                                        </li>
-                                        <li><a href="#">Headphones</a>
-                                        </li>
-                                        <li><a href="#">Videosgames</a>
-                                        </li>
-                                        <li><a href="#">Wireless Speakers</a>
-                                        </li>
-                                        <li><a href="#">Office Electronic</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="mega-menu__column">
-                                    <h4>Accessories &amp; Parts<span class="sub-toggle"></span></h4>
-                                    <ul class="mega-menu__list">
-                                        <li><a href="#">Digital Cables</a>
-                                        </li>
-                                        <li><a href="#">Audio &amp; Video Cables</a>
-                                        </li>
-                                        <li><a href="#">Batteries</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li><a href="#"><i class="icon-shirt"></i> Clothing &amp; Apparel</a>
-                        </li>
-                        <li><a href="#"><i class="icon-lampshade"></i> Home, Garden &amp; Kitchen</a>
-                        </li>
-                        <li><a href="#"><i class="icon-heart-pulse"></i> Health &amp; Beauty</a>
-                        </li>
-                        <li><a href="#"><i class="icon-diamond2"></i> Yewelry &amp; Watches</a>
-                        </li>
-                        <li class="menu-item-has-children has-mega-menu"><a href="#"><i class="icon-desktop"></i> Computer &amp; Technology</a>
-                            <div class="mega-menu">
-                                <div class="mega-menu__column">
-                                    <h4>Computer &amp; Technologies<span class="sub-toggle"></span></h4>
-                                    <ul class="mega-menu__list">
-                                        <li><a href="#">Computer &amp; Tablets</a>
-                                        </li>
-                                        <li><a href="#">Laptop</a>
-                                        </li>
-                                        <li><a href="#">Monitors</a>
-                                        </li>
-                                        <li><a href="#">Networking</a>
-                                        </li>
-                                        <li><a href="#">Drive &amp; Storages</a>
-                                        </li>
-                                        <li><a href="#">Computer Components</a>
-                                        </li>
-                                        <li><a href="#">Security &amp; Protection</a>
-                                        </li>
-                                        <li><a href="#">Gaming Laptop</a>
-                                        </li>
-                                        <li><a href="#">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li><a href="#"><i class="icon-baby-bottle"></i> Babies &amp; Moms</a>
-                        </li>
-                        <li><a href="#"><i class="icon-baseball"></i> Sport &amp; Outdoor</a>
-                        </li>
-                        <li><a href="#"><i class="icon-smartphone"></i> Phones &amp; Accessories</a>
-                        </li>
-                        <li><a href="#"><i class="icon-book2"></i> Books &amp; Office</a>
-                        </li>
-                        <li><a href="#"><i class="icon-car-siren"></i> Cars &amp; Motocycles</a>
-                        </li>
-                        <li><a href="#"><i class="icon-wrench"></i> Home Improments</a>
-                        </li>
-                        <li><a href="#"><i class="icon-tag"></i> Vouchers &amp; Services</a>
-                        </li>
-                    </ul>
+                    <div class="ps-carousel--nav-inside owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on" data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
+                        <div class="ps-banner bg--cover" data-background="{{asset('assets/img/slider/home-1/slide-1.jpg')}}"><a class="ps-banner__overlay" href="shop-default.html.htm"></a></div>
+                        <div class="ps-banner bg--cover" data-background="{{asset('assets/img/slider/home-1/slide-2.jpg')}}"><a class="ps-banner__overlay" href="shop-default.html.htm"></a></div>
+                        <div class="ps-banner bg--cover" data-background="{{asset('assets/img/slider/home-1/slide-3.jpg')}}"><a class="ps-banner__overlay" href="shop-default.html.htm"></a></div>
+                    </div>
                 </div>
-                <div class="ps-section__center">
-                    <div class="ps-carousel--dots owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on"><a href="#">
-                        <img src="{{asset('assets/img/slider/home-5/1.jpg')}}" alt=""></a><a href="#">
-                        <img src="{{asset('assets/img/slider/home-5/2.jpg')}}" alt=""></a><a href="#">
-                        <img src="{{asset('assets/img/slider/home-5/3.jpg')}}" alt=""></a></div><a href="#">
-                        <img src="{{asset('assets/img/slider/home-5/promotion-6.jpg')}}" alt=""></a>
-                </div>
-                <div class="ps-section__right"><a href="#">
-                    <img src="{{asset('assets/img/slider/home-5/promotion-1.jpg')}}" alt=""></a><a href="#">
-                    <img src="{{asset('assets/img/slider/home-5/promotion-2.jpg')}}" alt=""></a><a class="wide" href="#">
-                    <img src="{{asset('assets/img/slider/home-5/promotion-3.jpg')}}" alt=""></a><a href="#">
-                    <img src="{{asset('assets/img/slider/home-5/promotion-4.jpg')}}" alt=""></a><a href="#">
-                    <img src="{{asset('assets/img/slider/home-5/promotion-5.jpg')}}" alt=""></a></div>
+                <div class="ps-section__right"><a class="ps-collection" href="#"><img src="{{asset('assets/img/slider/home-1/promotion-1.jpg')}}" alt=""></a><a class="ps-collection" href="#"><img src="{{asset('assets/img/slider/home-1/promotion-2.jpg')}}" alt=""></a></div>
             </div>
         </div>
+    </div>
+    <div id="homepage-5">
+        
+  
         <div class="ps-search-trending">
             <div class="container">
                 <div class="ps-section__header">
@@ -468,15 +376,101 @@
                         <div class="ps-tabs">
                             <div class="ps-tabs">
                                 <div class="ps-tab active" id="tab-1">
-                                    <div class="ps-block__item"><a href="shop-default.html"><img src="img/categories/home-5/1.jpg" alt="#television"><span>#television</span></a><a href="shop-default.html"><img src="img/categories/home-5/2.jpg" alt="#camera"><span>#camera</span></a><a href="shop-default.html"><img src="img/categories/home-5/3.jpg" alt="#watch"><span>#watch</span></a><a href="shop-default.html"><img src="img/categories/home-5/4.jpg" alt="#chair"><span>#chair</span></a><a href="shop-default.html"><img src="img/categories/home-5/5.jpg" alt="#sneaker"><span>#sneaker</span></a><a href="shop-default.html"><img src="img/categories/home-5/6.jpg" alt="#xbox"><span>#xbox</span></a><a href="shop-default.html"><img src="img/categories/home-5/7.jpg" alt="#gopro"><span>#gopro</span></a><a href="shop-default.html"><img src="img/categories/home-5/8.jpg" alt="#lipstick"><span>#lipstick</span></a><a href="shop-default.html"><img src="img/categories/home-5/9.jpg" alt="#phone"><span>#phone</span></a><a href="shop-default.html"><img src="img/categories/home-5/10.jpg" alt="#laptop"><span>#laptop</span></a><a href="shop-default.html"><img src="img/categories/home-5/11.jpg" alt="#speaker"><span>#speaker</span></a><a href="shop-default.html"><img src="img/categories/home-5/12.jpg" alt="#book"><span>#book</span></a><a href="shop-default.html"><img src="img/categories/home-5/13.jpg" alt="#blender"><span>#blender</span></a><a href="shop-default.html"><img src="img/categories/home-5/14.jpg" alt="#bag"><span>#bag</span></a><a href="shop-default.html"><img src="img/categories/home-5/15.jpg" alt="#smartphone"><span>#smartphone</span></a><a href="shop-default.html"><img src="img/categories/home-5/16.jpg" alt="#camping"><span>#camping</span></a>
+                                    <div class="ps-block__item">
+                                        
+                                        <a href="shop-default.html"><img src="
+                                        {{asset('assets/img/categories/home-5/1.jpg')}}" alt="#television"><span>#television</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/2.jpg')}}" alt="#camera"><span>#camera</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/3.jpg')}}" alt="#watch"><span>#watch</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/4.jpg')}}" alt="#chair"><span>#chair</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/5.jpg')}}" alt="#sneaker"><span>#sneaker</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/6.jpg')}}" alt="#xbox"><span>#xbox</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/7.jpg')}}" alt="#gopro"><span>#gopro</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/8.jpg')}}" alt="#lipstick"><span>#lipstick</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/9.jpg')}}" alt="#phone"><span>#phone</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/10.jpg')}}" alt="#laptop"><span>#laptop</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/11.jpg')}}" alt="#speaker"><span>#speaker</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/12.jpg')}}" alt="#book"><span>#book</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/13.jpg')}}" alt="#blender"><span>#blender</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/14.jpg')}}" alt="#bag"><span>#bag</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/15.jpg')}}" alt="#smartphone"><span>#smartphone</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/16.jpg')}}" alt="#camping"><span>#camping</span></a>
                                     </div>
                                 </div>
                                 <div class="ps-tab" id="tab-2">
-                                    <div class="ps-block__item"><a href="shop-default.html"><img src="img/categories/home-5/3.jpg" alt="#watch"><span>#watch</span></a><a href="shop-default.html"><img src="img/categories/home-5/4.jpg" alt="#chair"><span>#chair</span></a><a href="shop-default.html"><img src="img/categories/home-5/5.jpg" alt="#sneaker"><span>#sneaker</span></a><a href="shop-default.html"><img src="img/categories/home-5/6.jpg" alt="#xbox"><span>#xbox</span></a><a href="shop-default.html"><img src="img/categories/home-5/7.jpg" alt="#gopro"><span>#gopro</span></a><a href="shop-default.html"><img src="img/categories/home-5/8.jpg" alt="#lipstick"><span>#lipstick</span></a><a href="shop-default.html"><img src="img/categories/home-5/9.jpg" alt="#phone"><span>#phone</span></a><a href="shop-default.html"><img src="img/categories/home-5/10.jpg" alt="#laptop"><span>#laptop</span></a><a href="shop-default.html"><img src="img/categories/home-5/11.jpg" alt="#speaker"><span>#speaker</span></a><a href="shop-default.html"><img src="img/categories/home-5/12.jpg" alt="#book"><span>#book</span></a><a href="shop-default.html"><img src="img/categories/home-5/13.jpg" alt="#blender"><span>#blender</span></a><a href="shop-default.html"><img src="img/categories/home-5/14.jpg" alt="#bag"><span>#bag</span></a><a href="shop-default.html"><img src="img/categories/home-5/15.jpg" alt="#smartphone"><span>#smartphone</span></a><a href="shop-default.html"><img src="img/categories/home-5/16.jpg" alt="#camping"><span>#camping</span></a>
+                                    <div class="ps-block__item">
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/3.jpg')}}" alt="#watch"><span>#watch</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/4.jpg')}}" alt="#chair"><span>#chair</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/5.jpg')}}" alt="#sneaker"><span>#sneaker</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/6.jpg')}}" alt="#xbox"><span>#xbox</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/7.jpg')}}" alt="#gopro"><span>#gopro</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/8.jpg')}}" alt="#lipstick"><span>#lipstick</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/9.jpg')}}" alt="#phone"><span>#phone</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/10.jpg')}}" alt="#laptop"><span>#laptop</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/11.jpg')}}" alt="#speaker"><span>#speaker</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/12.jpg')}}" alt="#book"><span>#book</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/13.jpg')}}" alt="#blender"><span>#blender</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/14.jpg')}}" alt="#bag"><span>#bag</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/15.jpg')}}" alt="#smartphone"><span>#smartphone</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/16.jpg')}}" alt="#camping"><span>#camping</span></a>
                                     </div>
                                 </div>
                                 <div class="ps-tab" id="tab-3">
-                                    <div class="ps-block__item"><a href="shop-default.html"><img src="img/categories/home-5/4.jpg" alt="#chair"><span>#chair</span></a><a href="shop-default.html"><img src="img/categories/home-5/5.jpg" alt="#sneaker"><span>#sneaker</span></a><a href="shop-default.html"><img src="img/categories/home-5/6.jpg" alt="#xbox"><span>#xbox</span></a><a href="shop-default.html"><img src="img/categories/home-5/7.jpg" alt="#gopro"><span>#gopro</span></a><a href="shop-default.html"><img src="img/categories/home-5/8.jpg" alt="#lipstick"><span>#lipstick</span></a><a href="shop-default.html"><img src="img/categories/home-5/9.jpg" alt="#phone"><span>#phone</span></a><a href="shop-default.html"><img src="img/categories/home-5/10.jpg" alt="#laptop"><span>#laptop</span></a><a href="shop-default.html"><img src="img/categories/home-5/11.jpg" alt="#speaker"><span>#speaker</span></a><a href="shop-default.html"><img src="img/categories/home-5/12.jpg" alt="#book"><span>#book</span></a><a href="shop-default.html"><img src="img/categories/home-5/13.jpg" alt="#blender"><span>#blender</span></a><a href="shop-default.html"><img src="img/categories/home-5/14.jpg" alt="#bag"><span>#bag</span></a><a href="shop-default.html"><img src="img/categories/home-5/15.jpg" alt="#smartphone"><span>#smartphone</span></a><a href="shop-default.html"><img src="img/categories/home-5/16.jpg" alt="#camping"><span>#camping</span></a>
+                                    <div class="ps-block__item">
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/4.jpg')}}" alt="#chair"><span>#chair</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/5.jpg')}}" alt="#sneaker"><span>#sneaker</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/6.jpg')}}" alt="#xbox"><span>#xbox</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/7.jpg')}}" alt="#gopro"><span>#gopro</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/8.jpg')}}" alt="#lipstick"><span>#lipstick</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/9.jpg')}}" alt="#phone"><span>#phone</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/10.jpg')}}" alt="#laptop"><span>#laptop</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/11.jpg')}}" alt="#speaker"><span>#speaker</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/12.jpg')}}" alt="#book"><span>#book</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/13.jpg')}}" alt="#blender"><span>#blender</span></a>
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/14.jpg')}}" alt="#bag"><span>#bag</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/15.jpg')}}" alt="#smartphone"><span>#smartphone</span></a>
+                                        
+                                        <a href="shop-default.html"><img src="{{asset('assets/img/categories/home-5/16.jpg')}}" alt="#camping"><span>#camping</span></a>
                                     </div>
                                 </div>
                                 <div class="ps-tab" id="tab-4">
@@ -510,7 +504,7 @@
                 <div class="ps-section__header">
                     <div class="ps-block--countdown-deal">
                         <div class="ps-block__left">
-                            <h3>Deal of the day</h3>
+                            <h3>Deal of the day  </h3>
                         </div>
                         <div class="ps-block__right">
                             <figure>
@@ -528,7 +522,7 @@
                 <div class="ps-section__content">
                     <div class="ps-carousel--nav owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="1000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="true" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="3" data-owl-item-md="4" data-owl-item-lg="4" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
                         <div class="ps-product ps-product--inner">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/home/1.jpg" alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="{{asset('assets/img/products/home/1.jpg')}}" alt=""></a>
                                 <div class="ps-product__badge">-16%</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Read More"><i class="icon-bag2"></i></a></li>
@@ -557,7 +551,8 @@
                             </div>
                         </div>
                         <div class="ps-product ps-product--inner">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/home/2.jpg" alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="product-default.html">
+                                <img src="{{asset('assets/img/products/home/2.jpg')}}" alt=""></a>
                                 <div class="ps-product__badge out-stock">Out Of Stock</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Read More"><i class="icon-bag2"></i></a></li>
@@ -586,7 +581,8 @@
                             </div>
                         </div>
                         <div class="ps-product ps-product--inner">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/home/3.jpg" alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="product-default.html">
+                                <img src="{{asset('assets/img/products/home/3.jpg')}}" alt=""></a>
                                 <div class="ps-product__badge">-25%</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Read More"><i class="icon-bag2"></i></a></li>
@@ -615,7 +611,8 @@
                             </div>
                         </div>
                         <div class="ps-product ps-product--inner">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/home/4.jpg" alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="product-default.html">
+                                <img src="{{asset('assets/img/products/home/4.jpg')}}" alt=""></a>
                                 <div class="ps-product__badge out-stock">Out Of Stock</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Read More"><i class="icon-bag2"></i></a></li>
@@ -644,7 +641,8 @@
                             </div>
                         </div>
                         <div class="ps-product ps-product--inner">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/home/5.jpg" alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="product-default.html">
+                                <img src="{{asset('assets/img/products/home/5.jpg')}}" alt=""></a>
                                 <div class="ps-product__badge out-stock">Out Of Stock</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Read More"><i class="icon-bag2"></i></a></li>
@@ -673,7 +671,8 @@
                             </div>
                         </div>
                         <div class="ps-product ps-product--inner">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/home/6.jpg" alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="product-default.html">
+                                <img src="{{asset('assets/img/products/home/6.jpg')}}" alt=""></a>
                                 <div class="ps-product__badge out-stock">Out Of Stock</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Read More"><i class="icon-bag2"></i></a></li>
@@ -702,7 +701,8 @@
                             </div>
                         </div>
                         <div class="ps-product ps-product--inner">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/home/7.jpg" alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="product-default.html">
+                                <img src="{{asset('assets/img/products/home/7.jpg')}}" alt=""></a>
                                 <div class="ps-product__badge">-46%</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Read More"><i class="icon-bag2"></i></a></li>
@@ -731,7 +731,8 @@
                             </div>
                         </div>
                         <div class="ps-product ps-product--inner">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/home/7.jpg" alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="product-default.html">
+                                <img src="{{asset('assets/img/products/home/7.jpg')}}" alt=""></a>
                                 <div class="ps-product__badge">-46%</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Read More"><i class="icon-bag2"></i></a></li>

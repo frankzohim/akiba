@@ -105,7 +105,7 @@
                                             <div class="form-group__content">
                                                 <select class="ps-select" id="category" name="category" title="category" style="width: 100%">
                                                     <option>Select category</option>
-                                                    @forelse ($categories as $category)
+                                                    @forelse ($allCategories as $category)
                                                         <option value="{{ $category['id'] }}">{{ $category['name']}}</option>
                                                     @empty
                                                         

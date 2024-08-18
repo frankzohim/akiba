@@ -148,13 +148,6 @@
          @include('layouts.backoffice.vendor.footer')
   
          <script> 
-            // let ids=[
-            //     @foreach($products as $p)
-            //   [$product['id']]
-            // @endforeach
-            // ];
-            
-            
             formatPrice(ids.split(','));
         </script>
        

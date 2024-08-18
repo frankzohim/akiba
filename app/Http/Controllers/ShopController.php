@@ -10,11 +10,15 @@ use Redirect;
 
 
 
-class HomepageController extends Controller
+class ShopController extends Controller
 {
-    public function homepage(Request $request){
 
-        return view('Homepage');
+
+
+    public function index(Request $request){
+
+       return view('shop');
+
 
     }
 

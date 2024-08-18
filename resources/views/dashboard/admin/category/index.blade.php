@@ -40,12 +40,12 @@
                                 <tr>
                                     <th>Category name</th>
                                     <th>State</th>
-                                    <th>Number of products</th>
+                                    <th>Parent</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($categories as $category)
+                                @foreach($categoriesAdmin as $category)
                                 <tr>
                                     <td><strong>{{ $category['name']}}</strong></td>
                                     <td> @if ($category['state'] == 1)
@@ -54,7 +54,7 @@
                                             <span class="ps-badge gray">Unpublish</span>
                                         @endif
                                     </td>
-                                    <td>0</td>
+                                    <td>@if(is_array($category['parent'])) {{ $category['parent']['name'] }} @endif</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="{{ route('category.edit',['id' => $category['id']]) }}">Edit</a>
@@ -135,8 +135,9 @@
                                 </label>
                                 <div class="form-group__content">
                                     <select class="ps-select" title="parent" name="parent">
-                                        @forelse ($categories as $category)
-                                             <option value="{{ $category['id'] }}">{{ $category['name']}}</option>
+                                        @forelse ($categoriesAdmin as $category)
+                                             <option value="{{ $category['id'] }}">
+                                              @if(is_array($category['parent'])) {{ $category['parent']['name'] }} -  @endif  {{ $category['name']}}</option>
                                         @empty
                                             
                                         @endforelse
@@ -145,24 +146,10 @@
                                 </div>
                             </div>
                           
-                          <input type="hidden" name="file_id_1" id="file_id_1" value="">
                         </div>
                         
                     </form>
-                     <label>{{ __("Logo")}}<sup>*</sup> (.png, .jpg, .jpeg) </label>
-
-                                <div class="cardbox closed" onclick="jQuery('#ratesbox, #ratesbit').toggle();">
-                                    <i class="fa fa-cloud-upload" style="color:red"></i>
-                                    <div class="small">
-                                        <form  class="dropzone" action="{{ route('category.image')}}" id="category-dropzone" name="file" files="true" enctype="multipart/form-data" method="POST">
-                                            <div class="dz-message" data-dz-message><span>Drop files here to upload</span></div>
-                                        @csrf
-                                            <input type="hidden" name="file_id" id="file_id" value="{{ time()."_".rand(10000, 100000)}}">
-
-                                        </form>
-                                    </div>
-                                    </div>
-                                    <br>
+                   
                     <div class="ps-form__bottom">
                             <button class="ps-btn ps-btn--gray" id="reset-btn" type='button'>Reset</button>
                             <button class="ps-btn ps-btn--sumbit success">Add new</button>
@@ -171,68 +158,6 @@
                 </div>
             </section>
             
-         <script>
-            Dropzone.options.categoryDropzone = { // camelized version of the `id`
-                paramName: "file", // The name that will be used to transfer the file
-                maxFilesize: 1, // MB
-                maxFiles : 1,
-                addRemoveLinks: true,
-                removedfile: function(file) {
-                    console.log('Call deleting');
-                    var name = file.name;
-                    var file_id = document.getElementById('file_id').value;
-                    const apiURL = jQuery('#api-url').val();
-                    const siteURL = jQuery('#site-url').val();
-                    // console.log(user_id);
-                    // DELETING IMAGE
-                    jQuery.ajax({
-                        type: "GET",
-                        dataType: 'json',
-                        url: 'http://'+siteURL+'/category/deleteImage',
-                        timeout: 15000,
-                        data: {
-                            filename: name,
-                            file_id: file_id,
-                        },
-                        success: function(response, statusCode) {
-                            console.log('success: ' + response);
-                            //console.log(response.);
-
-                        },
-                        error: function(response, statusCode) {
-
-                            //console.log(statusCode);
-                            console.log(response);
-
-                        },
-
-
-                    });
-                            var _ref;
-                            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-                },
-                acceptedFiles: ".jpeg,.jpg,.png",
-                init: function() {
-                this.on("addedfile", file => {
-                    //Check number of added photos
-                    if(this.files.length > 1){
-                        this.removeFile(file);
-                        return;
-                    }
-                if (this.files.length) {
-                    var _i, _len;
-                    for (_i = 0, _len = this.files.length; _i < _len - 1; _i++) // -1 to exclude current file
-                    {
-                        if(this.files[_i].name === file.name && this.files[_i].size === file.size && this.files[_i].lastModified.toString() === file.lastModified.toString())
-                        {
-                            this.removeFile(file);
-                        }
-                    }
-                }
-                });
-            }
-            };
-        </script>
         <script>
             document.querySelector('#reset-btn').addEventListener('click', function(){
                 console.log('resting');
@@ -259,35 +184,16 @@
 
             
             if(jQuery('#category_name').val() === "" || jQuery('#category_name').val() === undefined){
-                    // steps('5','this');
                     jQuery('#category_name').addClass('required-active');
                     jQuery('#ppt-invalid-fields').show();
                     jQuery('#ppt-invalid-fields-text').html("category name is required");
                     return false;
             }
 
-             //Checking if at least one image has been successfully uploaded
-            let categoryDropzone = document.getElementById("category-dropzone");
-            let children = categoryDropzone.children;
-            var numberUpload = 0;
-            for (let i = 0; i < children.length; i++) {
-
-                if (Array.from(children[i].classList).includes('dz-success')){
-                    numberUpload++;
-                }
-            }
-
-            if(numberUpload < 1){
-                jQuery('#ppt-invalid-fields').show();
-                jQuery('#ppt-invalid-fields-text').html("Please upload a logo");
-                return false;
-            }
-
             // Submit form
             if(canContinue){
 
                 // SAVE THE DATA
-                document.getElementById('file_id_1').value = document.getElementById('file_id').value;
                 document.getElementById('create_category').submit();
 
             }

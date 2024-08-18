@@ -68,7 +68,7 @@
                                     <input class="form-control" type="text" id="username" name="username" placeholder="Username">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="phone_number" id="phone" type="tel" placeholder="Phone number">
+                                    <input class="form-control" name="phone_number" id="phone" type="tel" placeholder="Phone number" style="width: 100%" size="100">
                                     <span id="valid-msg" style="display:none">✓ {{ __("Valid")}}</span>
 		                            <span id="error-msg" class="hide"></span>
                                 </div>

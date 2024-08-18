@@ -10,15 +10,14 @@ use Illuminate\Support\Facades\Session;
 
 class ProductService{
 
-    public function Products(){
-        
+    public function products(){
         
         $url=(new UrlApiService())->getUrl();
             
             try{
                 $token=Session::get('tokenUser');
                 $response = Http::asForm()->withToken($token)->get($url."/api/v1/products");
-               
+                //dd($response->body());
                 $Products = json_decode((string) $response->getBody(), true);
                 
                 if($Products['data'] === null){
@@ -26,6 +25,29 @@ class ProductService{
                 }
                 else{
                     return $Products['data'];
+                }
+
+            }catch(\Exception $e){
+
+                return [];
+            }
+
+    }
+
+    public function getProducts(){
+        
+        $url=(new UrlApiService())->getUrl();
+            
+            try{
+                $response = Http::get($url."/api/productsList");
+                //dd($response->body());
+                $products = json_decode((string) $response->getBody(), true);
+                //dd($products);
+                if($products['data'] === null){
+                    return [];
+                }
+                else{
+                    return $products['data'];
                 }
 
             }catch(\Exception $e){
@@ -62,8 +84,7 @@ class ProductService{
     }
 
     public function getProductStore($storeId){
-        
-        
+
         $url=(new UrlApiService())->getUrl();
             
             try{
@@ -89,11 +110,12 @@ class ProductService{
 
     public function getProduct($id){
        
+        //dd($id);
         $url=(new UrlApiService())->getUrl();
             
             try{
                 $token=Session::get('tokenUser');
-                $response = Http::asForm()->withToken($token)->get($url."/api/v1/products/".$id);
+                $response = Http::get($url."/api/getProduct/".$id);
                 //dd($response->body());
                 $product = json_decode((string) $response->getBody(), true);
 

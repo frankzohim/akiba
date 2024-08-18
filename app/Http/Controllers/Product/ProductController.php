@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Services\Api\Products\ProductService;
 use App\Services\Api\Categories\CategoryService;
-use App\Services\Api\Brands\BrandService;
 use App\Services\Api\Stores\StoreService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -45,14 +44,11 @@ class ProductController extends Controller
         //Delete directory on page refresh
         $user = Session::get('currentUser');
 
-        //Loading products categories
-        $categories = (new CategoryService())->categories();
-        //Loading brand
-        $brands = (new BrandService())->brands();
+        //Loading categories
+        $allCategories = (new CategoryService())->getCategories();
 
-        //dd($categories);
         \Illuminate\Support\Facades\Storage::deleteDirectory('products./'.$user->id);
-        return view('dashboard.vendor.product.create', compact('categories', 'brands'));
+        return view('dashboard.vendor.product.create', compact('allCategories'));
     }
 
     /**
@@ -121,9 +117,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $Product)
+    public function show($id)
     {
-        
+        //Loading product from API
+        //dd($id);
+        $product = (new ProductService())->getProduct($id);
+        //dd($product);
+        return view('products.details', compact('product'));
     }
 
     /**
