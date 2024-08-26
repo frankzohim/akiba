@@ -84,11 +84,10 @@
                                             <input class="form-control" id='quantity' name='quantity' type="text" placeholder="1" value='1'>
                                         </div>
                                     </figure><a class="ps-btn ps-btn--black" href="#" id="addToCart">Add to cart</a>
-                                    <form action="{{ route('cart.store') }}" method="POST" id="addCartForm">	
-                                        @csrf								  
+                                  								  
                                       
                                             <input type="hidden" id="productId" name="productId" value="{{ $product['id'] }}">
-                                        </p> 
+                                      
                                     </form>
                                     <a class="ps-btn" href="#">Buy Now</a>
                                     <div class="ps-product__actions"><a href="#"><i class="icon-heart"></i></a><a href="#"><i class="icon-chart-bars"></i></a></div>

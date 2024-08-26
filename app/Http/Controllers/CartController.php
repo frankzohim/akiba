@@ -79,7 +79,31 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       // Update a product's quantity
+
+       //return $request->add;
+
+       //if add is true we add
+       if($request->add === true){
+             Cart::update($id, array(
+                'quantity' => 1, // so if the current product has a quantity of 4, another 1 will be added so this will result to 5
+            ));
+
+             return 'Quantity plus';
+       }
+
+         //if add is false we minus
+       else{
+             Cart::update($id, array(
+            'quantity' => -1, // so if the current product has a quantity of 4, 1 will be subtracted so this will result to 4
+            ));
+
+             return 'Quantity minus';
+       }
+
+       
+
+       
     }
 
     /**
@@ -87,6 +111,7 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Cart::remove($id);
+        return redirect(route('viewCart'))->with('cart_delete', 'Produit retiré du panier avec succès');
     }
 }

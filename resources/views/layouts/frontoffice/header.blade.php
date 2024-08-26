@@ -308,7 +308,7 @@
                         <div class="ps-cart--mini"><a class="header__extra" href="#"><i class="icon-bag2"></i><span><i>{{ $cartCount }}</i></span></a>
                             <div class="ps-cart__content">
                                 @php
-                                 $i=0;
+                                 $i=1;
                                  
                                 @endphp
                                 @foreach($cartItems as $item)
@@ -316,11 +316,28 @@
                                     @if($i > 2)
                                       @break
                                     @endif
+                                    @php
+                                        $i++;
+                                    @endphp
                                    
                                         <div class="ps-cart__items">
                                             <div class="ps-product--cart-mobile">
                                                 <div class="ps-product__thumbnail"><a href="#"><img src="{{ route('display.product.image',['id'=>$item['associatedModel']['id'], 'path'=>$item['associatedModel']['images'][0]['id']] )}}" alt="" /></a></div>
-                                                <div class="ps-product__content"><a class="ps-product__remove" href="#"><i class="icon-cross"></i></a><a href="product-default.html">{{ $item['name']}}</a>
+
+                                                <div class="ps-product__content">
+                                                    
+                                                    <form action="{{ route('cart.destroy', $item->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                           <button class="ps-product__remove" type="submit"
+                                                           style="border:none; background-color: transparent;"> 
+                                                              <i class="icon-cross"></i>
+                                                           </button>
+                                                    </form> 
+
+                                                   
+                                                    
+                                                    <a href="product-default.html">{{ $item['name']}}</a>
                                                     <p><strong>Sold by:</strong> {{ $item['associatedModel']['store']['name']}}</p><small>{{$item['quantity']}} x XAF {{ number_format($item['price'], 2) }}</small>
                                                 </div>
                                             </div>
@@ -601,10 +618,15 @@
             </form>
         </div>
         <script>
-        document.getElementById("logout_action").addEventListener("click", function(event){
-            event.preventDefault();
-            document.getElementById('logout').submit();
+        
+            
+            document.getElementById("logout_action").addEventListener("click", function(event){
+                event.preventDefault();
+                document.getElementById('logout').submit();
 
-    });
+            });
+
+    
+   
     </script>
     </header>

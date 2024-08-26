@@ -49,7 +49,7 @@ Route::group(['middleware' => 'sharedView'], function () {
 
     Route::resource('cart', 'App\Http\Controllers\CartController')->only(['index', 'store', 'update', 'destroy']);
 
-    Route::get('cart', [CartController::class,'viewCart'])->name('viewCart');
+    Route::get('viewCart', [CartController::class,'viewCart'])->name('viewCart');
 
     Route::get('/login', function () { return view('auth.login'); });
 

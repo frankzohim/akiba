@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
 
          View::composer(['layouts.frontoffice.master', 'cart.index'], function ($view) {
             $view->with([
-                'cartCount' => Cart::getTotalQuantity(), 
+                'cartCount' => count(Cart::getContent()), 
                 'cartTotal' => Cart::getTotal(),
                 'cartItems' => Cart::getContent(),
             ]);

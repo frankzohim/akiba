@@ -14,7 +14,7 @@ class HomepageController extends Controller
 {
     public function homepage(Request $request){
 
-        return view('Homepage');
+        return view('homepage');
 
     }
 

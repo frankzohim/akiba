@@ -1,10 +1,13 @@
 "use strict";
 
+console.log('cart.js');
 const addCart = document.querySelector('#addToCart');
 const addCartForm =  document.querySelector('#addCartForm');
 const quantity = document.querySelector('#quantity');
 const up = document.querySelector('.up');
 const down = document.querySelector('.down');
+
+
 
 //Add event on click
 addCart.addEventListener('click', function(e){
@@ -23,5 +26,6 @@ down.addEventListener('click', function(e){
    if(Number(quantity.value) > 1)
       quantity.value = Number(quantity.value) - 1;
 })
+
 
  

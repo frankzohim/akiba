@@ -773,10 +773,34 @@
                                     <div class="ps-product__thumbnail"><a href="{{ route('details', ['id'=>$product['id']])}}"><img src="{{ route('display.product.image',['id'=>$product['id'], 'path'=>$product['images'][0]['id']] )}}" alt="" /></a>
                                         <div class="ps-product__badge hot">Hot</div>
                                         <ul class="ps-product__actions">
-                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                            <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="icon-chart-bars"></i></a></li>
+                                             <li>
+                                                <a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a>
+                                            </li>
+                                            <li>
+                                               
+                                                <form action="{{ route('cart.store') }}" method="POST" id="addCartForm">	
+                                                    @csrf
+                                                     
+                                                    <input class="form-control" id='quantity' name='quantity' type="hidden" value='1'>
+                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart">
+                                                            <button type='submit' style="border:none; background-color: transparent;">
+                                                            <i class="icon-bag2"></i>
+                                                        </button>
+                                                        </a>
+                                                        
+                                                                                    
+                                                        <input type="hidden" id="productId" name="productId" value="{{ $product['id'] }}">
+                                                           
+                                                </form>
+                                            </li>
+
+                                           
+
+                                            <li>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a>
+                                            </li>
+
+                                           
                                         </ul>
                                     </div>
                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">{{ $product['store']['name']}}</a>
